@@ -1,0 +1,15 @@
+# System files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.swp
+*.swo
+*~
+
+# Compressed files
+*.tar.gz
+*.zip
+
+# Logs
+*.log 
