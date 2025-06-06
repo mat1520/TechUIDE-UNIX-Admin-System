@@ -5,7 +5,7 @@ A modular, terminal-based admin backend for the TechUIDE eCommerce platform.
 ## Project Structure
 
 ```
-unix_final_project/
+./
 ├── main.sh                           # Main entry: login system + interactive menu
 └── modules/
     ├── create_files_dirs.sh          # Admin & Employee: File/directory creation
@@ -56,12 +56,12 @@ unix_final_project/
 3. **manage_files.sh**
    - List files
    - View file contents
-   - Edit files
-   - Delete files
+   - Edit files (admin only)
+   - Delete files (admin only)
 
 4. **permissions_links.sh**
    - Show file permissions
-   - Change permissions (all users)
+   - Change permissions (admin only)
    - Change ownership (admin only)
    - Create symbolic links (admin only)
 

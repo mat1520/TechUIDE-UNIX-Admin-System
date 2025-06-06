@@ -8,6 +8,15 @@ WORKSPACE_DIR=$(dirname $(dirname "$BASE_DIR"))
 # Obtener el rol del usuario desde el argumento
 role=$1
 
+# Función para verificar permisos de administrador
+check_admin() {
+    if [ "$role" != "admin" ]; then
+        echo "Permission denied: This operation requires administrator privileges"
+        return 1
+    fi
+    return 0
+}
+
 # Función para listar archivos de un directorio específico
 list_files() {
     local dir=$1
@@ -34,6 +43,10 @@ view_file() {
 
 # Función para editar un archivo
 edit_file() {
+    if ! check_admin; then
+        return 1
+    fi
+    
     local dir=$1
     echo "Available files:"
     ls "$dir"
@@ -52,6 +65,10 @@ edit_file() {
 
 # Función para eliminar un archivo
 delete_file() {
+    if ! check_admin; then
+        return 1
+    fi
+    
     local dir=$1
     echo "Available files:"
     ls "$dir"
@@ -69,11 +86,17 @@ delete_file() {
 show_menu() {
     clear
     echo "=== File Management ==="
-    echo "1. List files"
-    echo "2. View file"
-    echo "3. Edit file"
-    echo "4. Delete file"
-    echo "5. Return to main menu"
+    if [ "$role" = "admin" ]; then
+        echo "1. List files"
+        echo "2. View file"
+        echo "3. Edit file"
+        echo "4. Delete file"
+        echo "5. Return to main menu"
+    else
+        echo "1. List files"
+        echo "2. View file"
+        echo "3. Return to main menu"
+    fi
     echo
     echo "Select directory:"
     echo "a) Products"
@@ -84,7 +107,11 @@ show_menu() {
 # Bucle principal
 while true; do
     show_menu
-    read -p "Select option (1-5) and directory (a-c) (e.g., 1a): " choice
+    if [ "$role" = "admin" ]; then
+        read -p "Select option (1-5) and directory (a-c) (e.g., 1a): " choice
+    else
+        read -p "Select option (1-3) and directory (a-c) (e.g., 1a): " choice
+    fi
     
     option=${choice:0:1}
     dir_choice=${choice:1:1}
@@ -98,31 +125,48 @@ while true; do
     
     if [ -z "$dir" ]; then
         echo "Invalid directory choice"
+        read -p "Press Enter to continue..."
         continue
     fi
     
-    case $option in
-        1)
-            list_files "$dir"
-            ;;
-        2)
-            view_file "$dir"
-            ;;
-        3)
-            edit_file "$dir"
-            ;;
-        4)
-            delete_file "$dir"
-            ;;
-        5)
-            exit 0
-            ;;
-        *)
-            echo "Invalid option"
-            ;;
-    esac
+    if [ "$role" = "admin" ]; then
+        case $option in
+            1)
+                list_files "$dir"
+                ;;
+            2)
+                view_file "$dir"
+                ;;
+            3)
+                edit_file "$dir"
+                ;;
+            4)
+                delete_file "$dir"
+                ;;
+            5)
+                exit 0
+                ;;
+            *)
+                echo "Invalid option"
+                ;;
+        esac
+    else
+        case $option in
+            1)
+                list_files "$dir"
+                ;;
+            2)
+                view_file "$dir"
+                ;;
+            3)
+                exit 0
+                ;;
+            *)
+                echo "Invalid option"
+                ;;
+        esac
+    fi
     
     echo
-    echo "Press Enter to continue..."
-    read
+    read -p "Press Enter to continue..."
 done 
