@@ -1,53 +1,83 @@
-# TechUIDE UNIX Administration System
+<div align="center">
+  <img src="assets/LOGO.png" alt="TechUIDE Logo" width="150"/>
+  <h1>TechUIDE UNIX Administration System</h1>
+  <p><strong>🚀 Your Interactive Sandbox for Mastering the UNIX Command Line 🚀</strong></p>
 
-A modular Bash-based UNIX administration system simulating backend operations for the **TechUIDE** eCommerce platform. This project provides a hands-on, terminal-based experience for managing a simulated commercial environment, focusing on core UNIX commands and shell scripting.
-
-## ✨ Key Features
-
--   **Role-Based Access Control (RBAC)**: Differentiated menus and permissions for `admin`, `maria`, and `pedro`.
--   **Modular Design**: Functionality is split across logical modules for clarity and maintainability.
--   **Interactive Menus**: A user-friendly, color-coded interface for easy navigation.
--   **Core UNIX Operations**: Demonstrates a wide range of commands for file management, permissions, compression, and searching.
--   **Dynamic Structure Creation**: Scripts to automatically generate a realistic and detailed directory and file structure.
+  <p>
+    <img src="https://img.shields.io/badge/Shell_Script-121011?style=for-the-badge&logo=gnu-bash&logoColor=white" alt="Language">
+    <img src="https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge" alt="License: MIT">
+  </p>
+</div>
 
 ---
 
-## 🚀 Application Flow
+## 🎯 **Project Mission**
 
-This diagram illustrates the user flow, from authentication to accessing the different system modules.
+Imagine you're the new System Administrator for **TechUIDE**, a growing e-commerce company. Your mission is to manage the company's entire backend—from product catalogs to financial reports—using only a UNIX terminal.
 
+This project isn't just a tutorial; it's a **fully interactive learning environment**. It transforms abstract commands into practical skills by giving you a real-world playground to explore, manage, and even break (and fix!).
+
+---
+
+## ✨ **Core Features & Learning Objectives**
+
+This system is built around a set of core modules, each designed to teach you a fundamental aspect of UNIX administration:
+
+-   🔐 **Role-Based Access Control**: Step into the shoes of a powerful `admin` or a standard `employee`. See firsthand how permissions change what you can see and do.
+
+-   🗂️ **Realistic File & Directory Management**: Go beyond `touch` and `mkdir`. You'll be creating product files, updating inventory logs, archiving sales reports, and managing a logical business structure.
+
+-   🛡️ **Permission & Security Simulation**: Learn the power and importance of `chmod`. Make scripts executable, protect sensitive financial data by making it read-only, and manage directory access.
+
+-   🔎 **Powerful Search & Pattern Matching**: Use `grep` to instantly find products by name within files and `find` to locate any file or directory based on powerful patterns.
+
+-   🗜️ **Data Compression & Archiving**: Practice using `tar`, `gzip`, and `zip` to bundle up old sales data for storage, a common task for any system administrator.
+
+-   🔗 **Efficient Link Management**: Understand the practical difference between symbolic links (`ln -s`) for creating convenient shortcuts and hard links for creating file backups.
+
+---
+
+## 🚀 **Visualizing the System**
+
+Click the dropdowns below to see a visual breakdown of the application's flow and the company structure you'll be managing.
+
+<details>
+  <summary><strong>Click to view ► 🗺️ Application Menu Flow</strong></summary>
+  <br>
+  <em>This diagram shows how a user navigates through the system, from login to the various admin modules.</em>
+  <br><br>
+
+```mermaid
 graph TD
-    A[Start] --> B{Authenticate};
-    B -->|Success| C[Show Main Menu];
-    B -->|Failure| B;
-    C --> D{Select Option};
-    D -->|1. View Structure| E[project_architecture.sh];
-    D -->|2. File Management| F[manage_files.sh];
-    D -->|3. Compress/Search| G[compression_patterns.sh];
-    D -->|4. Create/Reset| H[create_files_dirs.sh];
-    D -->|5. Permissions/Links| I[permissions_links.sh];
-    D -->|6. Exit| J[End];
+    A[Start] --> B{Authenticate User};
+    B -->|✅ Valid| C[Main Menu];
+    B -->|❌ Invalid| B;
+    C --> D{Select Module};
+    D -->|View Structure| E[project_architecture.sh];
+    D -->|File Management| F[manage_files.sh];
+    D -->|Compress/Search| G[compression_patterns.sh];
+    D -->|"Create/Reset (Admin)"| H[create_files_dirs.sh];
+    D -->|"Permissions/Links (Admin)"| I[permissions_links.sh];
+    D -->|Exit| J[End Session];
     E --> C;
     F --> C;
     G --> C;
     H --> C;
     I --> C;
     
-    subgraph Admin Only
-        H;
-        I;
-    end
-    
-    style B fill:#f9f,stroke:#333,stroke-width:2px
-    style C fill:#ccf,stroke:#333,stroke-width:2px
-    style J fill:#f99,stroke:#333,stroke-width:2px
+    style B fill:#84a98c,stroke:#333,stroke-width:2px
+    style C fill:#cad2c5,stroke:#333,stroke-width:2px
+    style J fill:#d90429,stroke:#333,stroke-width:2px
+```
+</details>
 
----
+<details>
+  <summary><strong>Click to view ► 🗂️ Simulated Company Directory</strong></summary>
+  <br>
+  <em>This diagram shows the complete file and folder hierarchy for the "TechUIDE" company. This is your digital workspace.</em>
+  <br><br>
 
-## 📁 Project Structure
-
-The system generates and manages the following directory structure within the `tech_uide` folder.
-
+```mermaid
 graph TD
     subgraph "Tech UIDE E-commerce System"
         A("unix_final_project/")
@@ -92,145 +122,40 @@ graph TD
         D5 --> M1("financial/");
         M1 --> N1("Q1_2025_report.txt");
     end
+```
+</details>
 
 ---
 
-## 🛠️ Getting Started
+## 🛠️ **Quick Start Guide**
 
-### Prerequisites
+Get up and running in under a minute with these three steps.
 
--   A UNIX-like environment (Linux, macOS, or WSL on Windows).
--   `bash` shell.
--   The `tree` command is recommended for a better visual representation of the directory structure (optional).
+| Step | Command                                                                                                      | Description                                                                 |
+| :--: | ------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------- |
+|  1.  | `git clone https://github.com/mat1520/TechUIDE-UNIX-Admin-System.git`<br/>`cd TechUIDE-UNIX-Admin-System/unix_final_project` | Clone the repository and navigate into the project directory.               |
+|  2.  | `chmod +x main.sh modules/*.sh`                                                                              | Make all the necessary scripts executable. This only needs to be done once. |
+|  3.  | `./main.sh`                                                                                                  | Run the main application script to start the system.                        |
 
-### Installation & Usage
-
-1.  **Clone the Repository**
-    ```sh
-    git clone https://github.com/mat1520/TechUIDE-UNIX-Admin-System.git
-    cd TechUIDE-UNIX-Admin-System
-    ```
-
-2.  **Set Executable Permissions**
-    Make the main script and all modules executable:
-    ```sh
-    chmod +x main.sh modules/*.sh
-    ```
-
-3.  **Run the Application**
-    ```sh
-    ./main.sh
-    ```
-
-4.  **Login**
-    Use one of the available usernames when prompted: `admin`, `maria`, or `pedro`.
+> **💡 Pro Tip:** After starting the system, log in as `admin` and select **Option 4** to create the initial file structure. Then, you're ready to explore!
 
 ---
 
-## ⚙️ Modules Overview
+## 👥 **User Roles & Permissions**
 
--   `main.sh`: The entry point of the application. Handles user authentication and the main menu.
--   `modules/create_files_dirs.sh`: Creates the initial directory and file structure for the simulation. (Admin only)
--   `modules/project_architecture.sh`: Displays a detailed view of the project structure, including statistics.
--   `modules/manage_files.sh`: Provides tools for file manipulation (read, write, move, copy, delete).
--   `modules/permissions_links.sh`: Manages file/directory permissions and creates symbolic/hard links. (Admin only)
--   `modules/compression_patterns.sh`: Compresses directories into archives and searches for files by pattern or content.
+The system features two distinct user roles to simulate a real-world IT environment:
 
-## Features
+-   👑 **Administrator (`admin`)**: Possesses full control. Can create/delete files, manage permissions, and access all system modules.
+-   👤 **Employee (`maria` & `pedro`)**: Represents standard users with restricted access. They can view data and perform basic file operations but are blocked from sensitive or destructive actions.
 
-- **Role-based access control** (`admin`, `maria`, `pedro`)
-- **Basic file management** operations
-- **Compression and pattern matching** using standard UNIX tools
-- **Permission and link management** for security
-- **Simple interface** with clear menus
+---
 
-## Structure
+## ✍️ **Author**
 
-- `main.sh`: Main script with user interface
-- `modules/`: Contains all functional scripts
-- `tech_uide/`: The root directory for the simulated company, created at runtime
+This project was developed by **mat1520**.
 
-## How to Run
-
-1. **Open a UNIX-like terminal** (like Git Bash on Windows, or any terminal on Linux/macOS/WSL).
-2. Navigate to the `unix_final_project` directory.
-3. Make the scripts executable:
-   ```bash
-   chmod +x main.sh modules/*.sh
-   ```
-4. Run the main script:
-   ```bash
-   ./main.sh
-   ```
-5. Follow the on-screen prompts. Start by logging in as `admin` and using option `4` to create the file structure.
-
-## Available Users
-
-- `admin`: Full access to all features
-- `maria`: Limited access (cannot delete files or manage permissions)
-- `pedro`: Limited access (cannot delete files or manage permissions)
-
-## Functionality Overview
-
-### 1. View Project Structure
-- Complete directory tree visualization
-- File and directory statistics
-- Key file identification
-- Navigation examples
-
-### 2. File Management
-- **Read files** with content display
-- **Write/append** to existing files
-- **Move/rename** files safely
-- **List directories** with detailed view
-- **Create new files** with content
-- **Copy files** between locations
-- **Delete files** (admin only, with confirmation)
-
-### 3. Compression & Search
-- **Create archives** (TAR, GZIP, ZIP formats)
-- **Extract archives** to specified locations
-- **Search by pattern** (filename or extension)
-- **Search by content** using grep
-
-### 4. Create/Reset Structure (Admin Only)
-- Create complete e-commerce directory structure
-- Generate sample business data
-- Reset structure with confirmation
-
-### 5. Permissions & Links (Admin Only)
-- **View permissions** for files and directories
-- **Set file permissions** with common options
-- **Set directory permissions** with safety options
-- **Create symbolic links** for quick access
-- **Create hard links** for backup purposes
-- **View all links** in the system
-
-## Learning Benefits
-
-This system helps beginners learn:
-
-- **Basic UNIX commands** (ls, cd, mkdir, cp, mv, rm, etc.)
-- **File system navigation** and path concepts
-- **Permission management** and security
-- **File operations** and data manipulation
-- **Search and pattern matching**
-- **Archive creation** and compression
-- **Link management** concepts
-
-## Safety Features
-
-- **Confirmation prompts** for destructive operations
-- **Role-based restrictions** to prevent accidents
-- **Input validation** and error handling
-- **Clear feedback** for all operations
-
-## Business Context
-
-The simulated e-commerce structure includes:
-- Product catalogs and inventory
-- Sales tracking and reports
-- Employee directories
-- Financial reports
-
-This provides a realistic context for learning UNIX file management in a business environment. 
+<p align="center">
+  <a href="https://github.com/mat1520">
+    <img src="https://img.shields.io/badge/GitHub-Profile-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub Profile">
+  </a>
+</p> 
